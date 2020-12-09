@@ -3,7 +3,7 @@ import sqlite3
 sqliteConnection = False
 
 try:
-    sqliteConnection = sqlite3.connect('C:\\Users\\Victor\\Documents\\Cours\\I3\\S9\\IA\\Projet\\database.sqlite')
+    sqliteConnection = sqlite3.connect('D:\\Users\\emely\\Documents\\Cours\\Eseo\\I3\\IA\\database\\database.sqlite')
     cursor = sqliteConnection.cursor()
     print("Database created and Successfully Connected to SQLite")
 
