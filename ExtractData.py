@@ -7,92 +7,90 @@ try:
     cursor = sqliteConnection.cursor()
     print("Database created and Successfully Connected to SQLite\n")
 
-    # Selection des données du match
+    # Get data on the game
     homeTeamId = cursor.execute("select home_team_api_id from Match where id=1489;").fetchall()[0][0]
     awayTeamId = cursor.execute("select away_team_api_id from Match where id=1489;").fetchall()[0][0]
-    dateMatch = cursor.execute("select date from Match where id=1489;").fetchall()[0][0]
+    gameDate = cursor.execute("select date from Match where id=1489;").fetchall()[0][0]
 
-    # EQUIPE A DOMICILE
+    # HOME TEAM
 
-    # Récupération de la première date des 10 derniers matchs
-    datesMatch = cursor.execute("select date from Match where (home_team_api_id=" + str(homeTeamId)
-                                + " or away_team_api_id=" + str(homeTeamId)
-                                + ") and date<'" + dateMatch + "' order by date asc").fetchall()
-    if len(datesMatch) > 10:
-        dateAvantDixMatchs = datesMatch[-10:][0][0]
+    # Get first date of last 10 games
+    previousGamesDates = cursor.execute("select date from Match where (home_team_api_id=" + str(homeTeamId)
+                                        + " or away_team_api_id=" + str(homeTeamId)
+                                        + ") and date<'" + gameDate + "' order by date asc").fetchall()
+    if len(previousGamesDates) > 10:
+        lastTenGamesDates = previousGamesDates[-10:][0][0]
     else:
-        dateAvantDixMatchs = datesMatch[0][0]
-    print(dateAvantDixMatchs)
+        lastTenGamesDates = previousGamesDates[0][0]
 
-    # Récupération des 10 derniers résultats
+    # Get last 10 results
     homeTeamDraw = cursor.execute("select count(*) from Match where (home_team_api_id=" + str(homeTeamId)
                                   + " or away_team_api_id=" + str(homeTeamId)
-                                  + ") and date<'" + dateMatch + "' and date>='" + dateAvantDixMatchs
-                                  + "' and home_team_goal==away_team_goal").fetchall()[0][0]
-    homeTeamVictory = cursor.execute("select count(*) from Match where (home_team_api_id=" + str(homeTeamId)
-                                     + " or away_team_api_id=" + str(homeTeamId)
-                                     + ") and date<'" + dateMatch + "' and date>='" + dateAvantDixMatchs
-                                     + "' and home_team_goal>away_team_goal").fetchall()[0][
-        0]
-    homeTeamLose = cursor.execute("select count(*) from Match where (home_team_api_id=" + str(homeTeamId)
-                                  + " or away_team_api_id=" + str(homeTeamId)
-                                  + ") and date<'" + dateMatch + "' and date>='" + dateAvantDixMatchs
-                                  + "' and home_team_goal<away_team_goal").fetchall()[0][0]
+                                  + ") and date<'" + gameDate + "' and date>='" + lastTenGamesDates
+                                  + "' and home_team_goal=away_team_goal").fetchall()[0][0]
+    homeTeamWin = cursor.execute("select count(*) from Match where ((home_team_api_id=" + str(homeTeamId)
+                                 + " and home_team_goal>away_team_goal) or (away_team_api_id=" + str(homeTeamId)
+                                 + " and home_team_goal<away_team_goal)) and date<'" + gameDate + "' and date>='"
+                                 + lastTenGamesDates + "'").fetchall()[0][0]
+    homeTeamLoss = cursor.execute("select count(*) from Match where ((home_team_api_id=" + str(homeTeamId)
+                                  + " and home_team_goal<away_team_goal) or (away_team_api_id=" + str(homeTeamId)
+                                  + " and home_team_goal>away_team_goal)) and date<'" + gameDate + "' and date>='"
+                                  + lastTenGamesDates + "'").fetchall()[0][0]
 
-    # Calcul de la forme sur les 10 derniers matchs
-    nbMatchs = homeTeamDraw + homeTeamLose + homeTeamVictory
-    pourcentageVictoiresH = int(homeTeamVictory * 100 / nbMatchs)
-    pourcentageNulsH = int(homeTeamDraw * 100 / nbMatchs)
-    pourcentageDefaitesH = int(homeTeamLose * 100 / nbMatchs)
-    print("Sur " + str(nbMatchs) + " précédents :")
-    print(str(pourcentageVictoiresH) + "% V, " + str(pourcentageNulsH) + "% N, " +
-          str(pourcentageDefaitesH) + "% D\n")
+    # Form on last 10 games
+    nbGames = homeTeamDraw + homeTeamLoss + homeTeamWin
+    winPercentage = int(homeTeamWin * 100 / nbGames)
+    drawPercentage = int(homeTeamDraw * 100 / nbGames)
+    lossPercentage = int(homeTeamLoss * 100 / nbGames)
+    print("Home team last " + str(nbGames) + " games :")
+    print(str(winPercentage) + "% W, " + str(drawPercentage) + "% D, " +
+          str(lossPercentage) + "% L\n")
 
-    # EQUIPE A L'EXTERIEUR
+    # AWAY TEAM
 
-    # Récupération de la première date des 10 derniers matchs
-    datesMatch = cursor.execute("select date from Match where (home_team_api_id=" + str(awayTeamId)
-                                + " or away_team_api_id=" + str(awayTeamId)
-                                + ") and date<'" + dateMatch + "' order by date asc").fetchall()
+    # Get first date of last 10 games
+    previousGamesDates = cursor.execute("select date from Match where (home_team_api_id=" + str(awayTeamId)
+                                        + " or away_team_api_id=" + str(awayTeamId)
+                                        + ") and date<'" + gameDate + "' order by date asc").fetchall()
 
-    if len(datesMatch) > 10:
-        dateAvantDixMatchs = datesMatch[-10:][0][0]
+    if len(previousGamesDates) > 10:
+        lastTenGamesDates = previousGamesDates[-10:][0][0]
     else:
-        dateAvantDixMatchs = datesMatch[0][0]
+        lastTenGamesDates = previousGamesDates[0][0]
 
-    # Récupération des 10 derniers résultats
+    # Get last 10 results
     awayTeamDraw = cursor.execute("select count(*) from Match where (home_team_api_id=" + str(awayTeamId)
                                   + " or away_team_api_id=" + str(awayTeamId)
-                                  + ") and date<'" + dateMatch + "' and date>='" + dateAvantDixMatchs
-                                  + "' and home_team_goal==away_team_goal").fetchall()[0][0]
-    awayTeamLose = cursor.execute("select count(*) from Match where (home_team_api_id=" + str(awayTeamId)
-                                  + " or away_team_api_id=" + str(awayTeamId)
-                                  + ") and date<'" + dateMatch + "' and date>='" + dateAvantDixMatchs
-                                  + "' and home_team_goal>away_team_goal").fetchall()[0][
-        0]
-    awayTeamVictory = cursor.execute("select count(*) from Match where (home_team_api_id=" + str(awayTeamId)
-                                     + " or away_team_api_id=" + str(awayTeamId)
-                                     + ") and date<'" + dateMatch + "' and date>='" + dateAvantDixMatchs
-                                     + "' and home_team_goal<away_team_goal").fetchall()[0][
-        0]
+                                  + ") and date<'" + gameDate + "' and date>='" + lastTenGamesDates
+                                  + "' and home_team_goal=away_team_goal").fetchall()[0][0]
+    awayTeamLose = cursor.execute("select count(*) from Match where ((home_team_api_id=" + str(awayTeamId)
+                                  + " and home_team_goal<away_team_goal) or (away_team_api_id=" + str(awayTeamId)
+                                  + " and home_team_goal>away_team_goal)) and date<'" + gameDate + "' and date>='"
+                                  + lastTenGamesDates + "'").fetchall()[0][0]
+    awayTeamVictory = cursor.execute("select count(*) from Match where ((home_team_api_id=" + str(awayTeamId)
+                                     + " and home_team_goal>away_team_goal) or (away_team_api_id=" + str(awayTeamId)
+                                     + " and home_team_goal<away_team_goal)) and date<'" + gameDate + "' and date>='"
+                                     + lastTenGamesDates + "'").fetchall()[0][0]
 
-    # Calcul de la forme sur les 10 derniers matchs
-    nbMatchs = awayTeamDraw + awayTeamLose + awayTeamVictory
-    pourcentageVictoiresA = int(awayTeamVictory * 100 / nbMatchs)
-    pourcentageNulsA = int(awayTeamDraw * 100 / nbMatchs)
-    pourcentageDefaitesA = int(awayTeamLose * 100 / nbMatchs)
+    # Form on last 10 games
+    nbGames = awayTeamDraw + awayTeamLose + awayTeamVictory
+    winPercentage = int(awayTeamVictory * 100 / nbGames)
+    drawPercentage = int(awayTeamDraw * 100 / nbGames)
+    lossPercentage = int(awayTeamLose * 100 / nbGames)
 
-    print("Sur " + str(awayTeamDraw + awayTeamLose + awayTeamVictory) + " précédents :")
-    print(str(pourcentageVictoiresA) + "% V, " + str(pourcentageNulsA) +
-          "% N, " + str(pourcentageDefaitesA) + "% D\n")
+    print("Away team last " + str(nbGames) + " games :")
+    print(str(winPercentage) + "% W, " + str(drawPercentage) +
+          "% D, " + str(lossPercentage) + "% L\n")
 
-    # Calcul des probabilités de victoire
-    print("Probabilité de victoire de l'équipe à domicile : " +
-          str(int((pourcentageVictoiresH + pourcentageDefaitesA) / 2)) + "%")
-    print("Probabilité de nul : " +
-          str(int((pourcentageNulsA + pourcentageNulsH) / 2)) + "%")
-    print("Probabilité de victoire de l'équipe à l'extérieur : " +
-          str(int((pourcentageDefaitesH + pourcentageVictoiresA) / 2)) + "%")
+    # Probabilities
+    print("Probability of home team victory : " +
+          str(int((winPercentage + lossPercentage) / 2)) + "%")
+    print("Probability of draw : " +
+          str(int((drawPercentage + drawPercentage) / 2)) + "%")
+    print("Probability of away team victory : " +
+          str(int((lossPercentage + winPercentage) / 2)) + "%")
+
+    # Close connection
     cursor.close()
 
 except sqlite3.Error as error:
