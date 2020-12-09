@@ -20,9 +20,12 @@ try:
                                   + " and date<'" + dateMatch + "' and home_team_goal<away_team_goal").fetchall()[0][0]
 
     nbMatchs = homeTeamDraw + homeTeamLose + homeTeamVictory
+    pourcentageVictoiresH = "{0:.2f}".format(homeTeamVictory * 100 / nbMatchs)
+    pourcentageNulsH = "{0:.2f}".format(homeTeamDraw * 100 / nbMatchs)
+    pourcentageDefaitesH = "{0:.2f}".format(homeTeamLose * 100 / nbMatchs)
     print("Sur " + str(nbMatchs) + " précédents :")
-    print("{0:.2f}".format(homeTeamVictory*100/nbMatchs) + "% V, " + "{0:.2f}".format(homeTeamDraw*100/nbMatchs) + "% N, " +
-          "{0:.2f}".format(homeTeamLose*100/nbMatchs) + "% D\n")
+    print(str(pourcentageVictoiresH) + "% V, " + str(pourcentageNulsH) + "% N, " +
+          str(pourcentageDefaitesH) + "% D\n")
 
     awayTeamDraw = cursor.execute("select count(*) from Match where away_team_api_id=" + str(awayTeamId)
                                   + " and date<'" + dateMatch + "' and home_team_goal==away_team_goal").fetchall()[0][0]
@@ -34,9 +37,20 @@ try:
         0]
 
     nbMatchs = awayTeamDraw + awayTeamLose + awayTeamVictory
+    pourcentageVictoiresA = "{0:.2f}".format(awayTeamVictory*100/nbMatchs)
+    pourcentageNulsA = "{0:.2f}".format(awayTeamDraw*100/nbMatchs)
+    pourcentageDefaitesA = "{0:.2f}".format(awayTeamLose*100/nbMatchs)
+
     print("Sur " + str(awayTeamDraw + awayTeamLose + awayTeamVictory) + " précédents :")
-    print("{0:.2f}".format(awayTeamVictory*100/nbMatchs) + "% V, " + "{0:.2f}".format(awayTeamDraw*100/nbMatchs) +
-          "% N, " + "{0:.2f}".format(awayTeamLose*100/nbMatchs) + "% D\n")
+    print(str(pourcentageVictoiresA) + "% V, " + str(pourcentageNulsA) +
+          "% N, " + str(pourcentageDefaitesA) + "% D\n")
+
+    print("Probabilité de victoire de l'équipe à domicile : " +
+          "{0:.2f}".format((float(pourcentageVictoiresH)+float(pourcentageDefaitesA))/2) + "%")
+    print("Probabilité de nul : " +
+          "{0:.2f}".format((float(pourcentageNulsA) + float(pourcentageNulsH)) / 2) + "%")
+    print("Probabilité de victoire de l'équipe à l'extérieur : " +
+          "{0:.2f}".format((float(pourcentageDefaitesH) + float(pourcentageVictoiresA)) / 2) + "%")
     cursor.close()
 
 except sqlite3.Error as error:
@@ -44,4 +58,4 @@ except sqlite3.Error as error:
 finally:
     if sqliteConnection:
         sqliteConnection.close()
-        print("The SQLite connection is closed")
+        print("\nThe SQLite connection is closed")
