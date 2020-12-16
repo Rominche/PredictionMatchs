@@ -19,7 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80dc162f-98fd-432b-b558-3eb155a85565" name="Default Changelist" comment="Change name of file">
+    <list default="true" id="80dc162f-98fd-432b-b558-3eb155a85565" name="Default Changelist" comment="Add return condition if no previous game">
+      <change afterPath="$PROJECT_DIR$/src/ExtractData_BettingOdds.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExtractDataLastTenGames.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExtractDataLastTenGames.py" afterDir="false" />
     </list>
@@ -68,7 +69,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.ExtractDataLastTenGames">
+  <component name="RunManager" selected="Python.ExtractData_BettingOdds">
     <configuration name="ExtractData" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -124,6 +125,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ExtractDataLastTenGames.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ExtractData_BettingOdds" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PredictionMatchs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ExtractData_BettingOdds.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -239,9 +261,11 @@
       <item itemvalue="Python.ExtractData" />
       <item itemvalue="Python.ExtractData_TeamAttributes" />
       <item itemvalue="Python.ExtractDataLastTenGames" />
+      <item itemvalue="Python.ExtractData_BettingOdds" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ExtractData_BettingOdds" />
         <item itemvalue="Python.ExtractDataLastTenGames" />
         <item itemvalue="Python.ExtractData_TeamAttributes" />
         <item itemvalue="Python.ExtractDataLastTenGames" />
@@ -279,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608124829934</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add return condition if no previous game">
+      <created>1608128572812</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1608128572812</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -298,33 +329,34 @@
     <MESSAGE value="Change to function" />
     <MESSAGE value="Change last ten games" />
     <MESSAGE value="Change last ten games to function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change last ten games to function" />
+    <MESSAGE value="Add return condition if no previous game" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add return condition if no previous game" />
   </component>
   <component name="WindowStateProjectService">
     <state x="121" y="51" key="DiffContextDialog" timestamp="1608112386396">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="121" y="51" key="DiffContextDialog/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608112386396" />
-    <state width="1259" height="179" key="GridCell.Tab.0.bottom" timestamp="1608128397425">
+    <state width="1259" height="179" key="GridCell.Tab.0.bottom" timestamp="1608130051851">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="179" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608128397425" />
-    <state width="1259" height="179" key="GridCell.Tab.0.center" timestamp="1608128397424">
+    <state width="1259" height="179" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608130051851" />
+    <state width="1259" height="179" key="GridCell.Tab.0.center" timestamp="1608130051851">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="179" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608128397424" />
-    <state width="1259" height="179" key="GridCell.Tab.0.left" timestamp="1608128397422">
+    <state width="1259" height="179" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608130051851" />
+    <state width="1259" height="179" key="GridCell.Tab.0.left" timestamp="1608130051851">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="179" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608128397422" />
-    <state width="1259" height="179" key="GridCell.Tab.0.right" timestamp="1608128397424">
+    <state width="1259" height="179" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608130051851" />
+    <state width="1259" height="179" key="GridCell.Tab.0.right" timestamp="1608130051851">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="179" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608128397424" />
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1608125157367">
+    <state width="1259" height="179" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608130051851" />
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1608128577046">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608125157367" />
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608128577046" />
     <state x="458" y="255" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608122799215">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

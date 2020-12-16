@@ -1,7 +1,3 @@
-import sqlite3
-import configparser
-
-
 def last_ten_games(match_id, cursor):
 
     # Get data on the game
