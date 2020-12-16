@@ -3,9 +3,9 @@ import configparser
 
 sqliteConnection = False
 
-config=configparser.ConfigParser()
+config = configparser.ConfigParser()
 config.read('../config/config.ini')
-path = config.get('DEFAULT','PATH')
+path = config.get('DEFAULT', 'PATH')
 
 try:
     sqliteConnection = sqlite3.connect(path)
@@ -23,15 +23,15 @@ try:
     defenceAggression = cursor.execute("select defenceAggression "+teamId).fetchall()[0][0]
     defenceTeamWidth = cursor.execute("select defenceTeamWidth "+teamId).fetchall()[0][0]
 
-    teamOverall = (buildUpPlaySpeed \
-                  + buildUpPlayDribbling \
-                  + buildUpPlayPassing \
-                  + chanceCreationPassing \
-                  + chanceCreationCrossing \
-                  + chanceCreationShooting \
-                  + defencePressure \
-                  + defenceAggression \
-                  + defenceTeamWidth) / 9
+    teamOverall = (buildUpPlaySpeed
+                   + buildUpPlayDribbling
+                   + buildUpPlayPassing
+                   + chanceCreationPassing
+                   + chanceCreationCrossing
+                   + chanceCreationShooting
+                   + defencePressure
+                   + defenceAggression
+                   + defenceTeamWidth) / 9
 
     print(teamOverall)
 
