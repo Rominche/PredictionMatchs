@@ -7,6 +7,7 @@ config = configparser.ConfigParser()
 config.read('../config/config.ini')
 path = config.get('DEFAULT', 'PATH')
 
+
 try:
     sqliteConnection = sqlite3.connect(path)
     cursor = sqliteConnection.cursor()
