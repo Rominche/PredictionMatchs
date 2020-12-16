@@ -13,3 +13,6 @@ config.ini
 
 #workspace.xml suspect
 workspace.xml
+
+#idea
+.idea
