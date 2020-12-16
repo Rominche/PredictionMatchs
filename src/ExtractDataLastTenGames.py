@@ -4,15 +4,6 @@ import configparser
 
 def last_ten_games(match_id, cursor):
 
-    homeWinPercentage = 0
-    homeDrawPercentage = 0
-    homeLossPercentage = 0
-    awayWinPercentage = 0
-    awayDrawPercentage = 0
-    awayLossPercentage = 0
-
-    print("Database created and Successfully Connected to SQLite\n")
-
     # Get data on the game
     homeTeamId = cursor.execute("select home_team_api_id from Match where id=" + str(match_id) + ";").fetchall()[0][
         0]
@@ -28,6 +19,8 @@ def last_ten_games(match_id, cursor):
                                         + ") and date<'" + gameDate + "' order by date asc").fetchall()
     if len(previousGamesDates) > 10:
         lastTenGamesDates = previousGamesDates[-10:][0][0]
+    elif len(previousGamesDates) == 0:
+        return 0, 0, 0, 0, 0, 0
     else:
         lastTenGamesDates = previousGamesDates[0][0]
 
@@ -93,6 +86,7 @@ def last_ten_games(match_id, cursor):
 
     return homeWinPercentage, homeDrawPercentage, homeLossPercentage, awayWinPercentage, awayDrawPercentage, \
            awayLossPercentage
+
 
 # Probabilities
 # print("Probability of home team victory : " +
