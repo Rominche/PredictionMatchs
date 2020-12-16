@@ -7,3 +7,9 @@
 
 #Plugin JetBrain
 dbnavigator.xml
+
+#config.ini propre à chacun
+config.ini
+
+#workspace.xml suspect
+workspace.xml
