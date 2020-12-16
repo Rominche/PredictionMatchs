@@ -88,7 +88,14 @@ try:
     print("Probability of draw : " +
           str(int((homeDrawPercentage + awayDrawPercentage) / 2)) + "%")
     print("Probability of away team victory : " +
-          str(int((homeLossPercentage + awayWinPercentage) / 2)) + "%")
+          str(int((homeLossPercentage + awayWinPercentage) / 2)) + "%\n")
+
+    homeOdd = 100/int((homeWinPercentage + awayLossPercentage) / 2)
+    drawOdd = 100 / int((homeDrawPercentage + awayDrawPercentage) / 2)
+    awayOdd = 100 / int((homeLossPercentage + awayWinPercentage) / 2)
+    print("Odds :")
+    print(str('{:.2f}'.format(homeOdd)) + " " + str('{:.2f}'.format(drawOdd))
+                                                    + " " + str('{:.2f}'.format(awayOdd)))
 
     # Close connection
     cursor.close()
