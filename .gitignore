@@ -4,3 +4,6 @@
 
 #On ne lit pas la bdd
 *.sqlite
+
+#Plugin JetBrain
+dbnavigator.xml

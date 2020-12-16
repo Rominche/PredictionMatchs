@@ -1,9 +1,14 @@
 import sqlite3
+import configparser
 
 sqliteConnection = False
 
+config=configparser.ConfigParser()
+config.read('../config/config.ini')
+path = config.get('DEFAULT','PATH')
+
 try:
-    sqliteConnection = sqlite3.connect('D:\\Users\\emely\\Documents\\Cours\\Eseo\\I3\\IA\\database\\database.sqlite')
+    sqliteConnection = sqlite3.connect(path)
     cursor = sqliteConnection.cursor()
     print("Database created and Successfully Connected to SQLite\n")
 
