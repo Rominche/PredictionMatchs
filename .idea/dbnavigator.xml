@@ -25,14 +25,19 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="0b387b62-5f39-4dcc-bd3a-e5cef4c45405">
-        <schema name="main" object-types="constraint, column, view, dataset trigger, index, table" />
+        <schema name="main" object-types="column, table, dataset trigger, constraint, index, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="0b387b62-5f39-4dcc-bd3a-e5cef4c45405">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
-      <console name="select" type="STANDARD" schema="main" session="Main">select match_api_id, home_team_goal, away_team_goal, date from Match where (home_team_api_id=9905 and away_team_api_id=8722)or (home_team_api_id=8722 and away_team_api_id=9905) order by &quot;date&quot;;</console>
+      <console name="select" type="STANDARD" schema="main" session="Main"><![CDATA[select match_api_id,home_team_api_id, home_team_goal,away_team_api_id, away_team_goal, date from Match 
+where (home_team_api_id=9905 and away_team_api_id=8722)or (home_team_api_id=8722 and away_team_api_id=9905) order by "date";
+
+select home_team_goal, away_team_goal, id from "Match" ;
+
+select home_team_goal, away_team_goal from "Match" where id = 5;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

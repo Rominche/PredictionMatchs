@@ -6,13 +6,13 @@
 *.sqlite
 
 #Plugin JetBrain
-dbnavigator.xml
+.idea/dbnavigator.xml
 
 #config.ini propre à chacun
-config.ini
+config/config.ini
 
 #workspace.xml suspect
-workspace.xml
+.idea/workspace.xml
 
 #idea
 .idea
