@@ -1,13 +1,7 @@
-import sqlite3
-import configparser
-
-
-def team_overall(id_match, cursor):
+def team_overall(cursor, id_match):
 
     home_overall = 0
     away_overall = 0
-
-    print("Database created and Successfully Connected to SQLite")
 
     match_id = "from Match where id=" + str(id_match)
     date = cursor.execute("select date " + match_id).fetchall()[0][0]
@@ -23,23 +17,30 @@ def team_overall(id_match, cursor):
                                       + match_id).fetchall()[0]
 
     for i in list_home_player:
-        player_overall = cursor.execute("select overall_rating "
-                                        "from Player_Attributes "
-                                        "where player_api_id=" + str(i)
-                                        + " and date<'" + date
-                                        + "' ORDER BY date DESC").fetchall()[0][0]
+        if i is not None:
+            player_overall = cursor.execute("select overall_rating "
+                                            "from Player_Attributes "
+                                            "where player_api_id=" + str(i)
+                                            + " and date<'" + date
+                                            + "' ORDER BY date DESC").fetchall()[0][0]
+        else:
+            player_overall = 60
         home_overall += player_overall
 
     home_overall /= len(list_home_player)
 
     for i in list_away_player:
-        player_overall = cursor.execute("select overall_rating "
-                                        "from Player_Attributes "
-                                        "where player_api_id=" + str(i)
-                                        + " and date<'" + date
-                                        + "' ORDER BY date DESC").fetchall()[0][0]
+        if i is not None:
+            player_overall = cursor.execute("select overall_rating "
+                                            "from Player_Attributes "
+                                            "where player_api_id=" + str(i)
+                                            + " and date<'" + date
+                                            + "' ORDER BY date DESC").fetchall()[0][0]
+        else:
+            player_overall = 60
         away_overall += player_overall
 
     away_overall /= len(list_away_player)
 
-    return home_overall, away_overall
+    return '{:.2f}'.format(home_overall), '{:.2f}'.format(away_overall)
+
