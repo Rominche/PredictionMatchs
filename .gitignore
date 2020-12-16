@@ -1,0 +1,6 @@
+# IGNORE #
+##########
+
+
+#On ne lit pas la bdd
+*.sqlite
