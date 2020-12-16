@@ -3,19 +3,21 @@ import configparser
 
 sqliteConnection = False
 
-config=configparser.ConfigParser()
+config = configparser.ConfigParser()
 config.read('../config/config.ini')
-path = config.get('DEFAULT','PATH')
+path = config.get('DEFAULT', 'PATH')
 
 try:
     sqliteConnection = sqlite3.connect(path)
     cursor = sqliteConnection.cursor()
     print("Database created and Successfully Connected to SQLite\n")
 
+    matchId = 4410
+
     # Get data on the game
-    homeTeamId = cursor.execute("select home_team_api_id from Match where id=1489;").fetchall()[0][0]
-    awayTeamId = cursor.execute("select away_team_api_id from Match where id=1489;").fetchall()[0][0]
-    gameDate = cursor.execute("select date from Match where id=1489;").fetchall()[0][0]
+    homeTeamId = cursor.execute("select home_team_api_id from Match where id=" + str(matchId) + ";").fetchall()[0][0]
+    awayTeamId = cursor.execute("select away_team_api_id from Match where id=" + str(matchId) + ";").fetchall()[0][0]
+    gameDate = cursor.execute("select date from Match where id=" + str(matchId) + ";").fetchall()[0][0]
 
     # HOME TEAM
 
@@ -95,12 +97,12 @@ try:
     print("Probability of away team victory : " +
           str(int((homeLossPercentage + awayWinPercentage) / 2)) + "%\n")
 
-    homeOdd = 100/int((homeWinPercentage + awayLossPercentage) / 2)
+    homeOdd = 100 / int((homeWinPercentage + awayLossPercentage) / 2)
     drawOdd = 100 / int((homeDrawPercentage + awayDrawPercentage) / 2)
     awayOdd = 100 / int((homeLossPercentage + awayWinPercentage) / 2)
     print("Odds :")
     print(str('{:.2f}'.format(homeOdd)) + " " + str('{:.2f}'.format(drawOdd))
-                                                    + " " + str('{:.2f}'.format(awayOdd)))
+          + " " + str('{:.2f}'.format(awayOdd)))
 
     # Close connection
     cursor.close()
