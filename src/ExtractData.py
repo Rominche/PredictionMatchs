@@ -44,12 +44,12 @@ try:
 
     # Form on last 10 games
     nbGames = homeTeamDraw + homeTeamLoss + homeTeamWin
-    winPercentage = int(homeTeamWin * 100 / nbGames)
-    drawPercentage = int(homeTeamDraw * 100 / nbGames)
-    lossPercentage = int(homeTeamLoss * 100 / nbGames)
+    homeWinPercentage = int(homeTeamWin * 100 / nbGames)
+    homeDrawPercentage = int(homeTeamDraw * 100 / nbGames)
+    homeLossPercentage = int(homeTeamLoss * 100 / nbGames)
     print("Home team last " + str(nbGames) + " games :")
-    print(str(winPercentage) + "% W, " + str(drawPercentage) + "% D, " +
-          str(lossPercentage) + "% L\n")
+    print(str(homeWinPercentage) + "% W, " + str(homeDrawPercentage) + "% D, " +
+          str(homeLossPercentage) + "% L\n")
 
     # AWAY TEAM
 
@@ -79,21 +79,21 @@ try:
 
     # Form on last 10 games
     nbGames = awayTeamDraw + awayTeamLose + awayTeamVictory
-    winPercentage = int(awayTeamVictory * 100 / nbGames)
-    drawPercentage = int(awayTeamDraw * 100 / nbGames)
-    lossPercentage = int(awayTeamLose * 100 / nbGames)
+    awayWinPercentage = int(awayTeamVictory * 100 / nbGames)
+    awayDrawPercentage = int(awayTeamDraw * 100 / nbGames)
+    awayLossPercentage = int(awayTeamLose * 100 / nbGames)
 
     print("Away team last " + str(nbGames) + " games :")
-    print(str(winPercentage) + "% W, " + str(drawPercentage) +
-          "% D, " + str(lossPercentage) + "% L\n")
+    print(str(awayWinPercentage) + "% W, " + str(awayDrawPercentage) +
+          "% D, " + str(awayLossPercentage) + "% L\n")
 
     # Probabilities
     print("Probability of home team victory : " +
-          str(int((winPercentage + lossPercentage) / 2)) + "%")
+          str(int((homeWinPercentage + awayLossPercentage) / 2)) + "%")
     print("Probability of draw : " +
-          str(int((drawPercentage + drawPercentage) / 2)) + "%")
+          str(int((homeDrawPercentage + awayDrawPercentage) / 2)) + "%")
     print("Probability of away team victory : " +
-          str(int((lossPercentage + winPercentage) / 2)) + "%")
+          str(int((homeLossPercentage + awayWinPercentage) / 2)) + "%")
 
     # Close connection
     cursor.close()
