@@ -20,12 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80dc162f-98fd-432b-b558-3eb155a85565" name="Default Changelist" comment="Change name of file">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExtractData.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExtractDataLastTenGames.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExtractData_Between2Teams.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExtractData_Between2Teams.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExtractData_TeamAttributes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExtractData_TeamAttributes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExtractDataLastTenGames.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExtractDataLastTenGames.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +41,11 @@
         <option name="argument" value="--tags" />
         <option name="title" value="All" />
       </GitPushTagMode>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="victor" />
+      </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -67,7 +68,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.ExtractData_TeamAttributes">
+  <component name="RunManager" selected="Python.ExtractDataLastTenGames">
     <configuration name="ExtractData" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -235,15 +236,14 @@
     </configuration>
     <list>
       <item itemvalue="Python.ExtractData2Team" />
-      <item itemvalue="Python.ExtractDataLastTenGames" />
       <item itemvalue="Python.ExtractData" />
       <item itemvalue="Python.ExtractData_TeamAttributes" />
       <item itemvalue="Python.ExtractDataLastTenGames" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.ExtractData_TeamAttributes" />
         <item itemvalue="Python.ExtractDataLastTenGames" />
+        <item itemvalue="Python.ExtractData_TeamAttributes" />
       </list>
     </recent_temporary>
   </component>
@@ -271,21 +271,33 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1259" height="179" key="GridCell.Tab.0.bottom" timestamp="1608110936274">
+    <state x="121" y="51" key="DiffContextDialog" timestamp="1608112386396">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="179" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608110936274" />
-    <state width="1259" height="179" key="GridCell.Tab.0.center" timestamp="1608110936274">
+    <state x="121" y="51" key="DiffContextDialog/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608112386396" />
+    <state width="1259" height="179" key="GridCell.Tab.0.bottom" timestamp="1608124405096">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="179" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608110936274" />
-    <state width="1259" height="179" key="GridCell.Tab.0.left" timestamp="1608110936273">
+    <state width="1259" height="179" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608124405096" />
+    <state width="1259" height="179" key="GridCell.Tab.0.center" timestamp="1608124405096">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="179" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608110936273" />
-    <state width="1259" height="179" key="GridCell.Tab.0.right" timestamp="1608110936274">
+    <state width="1259" height="179" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608124405096" />
+    <state width="1259" height="179" key="GridCell.Tab.0.left" timestamp="1608124405095">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="179" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608110936274" />
+    <state width="1259" height="179" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608124405095" />
+    <state width="1259" height="179" key="GridCell.Tab.0.right" timestamp="1608124405096">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="179" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608124405096" />
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1608112451530">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608112451530" />
+    <state x="458" y="255" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608122799215">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="458" y="255" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680/1920.0.1366.728@0.0.1280.680" timestamp="1608122799215" />
   </component>
 </project>
