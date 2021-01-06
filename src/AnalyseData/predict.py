@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from sklearn import metrics
 
 np.random.seed(7)
 import matplotlib.pyplot as plt
@@ -32,10 +33,26 @@ while i < 10:
     model = MLPClassifier(hidden_layer_sizes=[nbr_neurones], random_state=7, max_iter=nbr_iterations)
     model.fit(x_train, y_train)
 
-    y_pred_train = model.predict(x_train)
+    y_predit_train = model.predict(x_train)
+    y_predit_test = model.predict(x_test)
+
+    if i == 0:
+        tableau_erreurs_train = np.array(100 - metrics.accuracy_score(y_train, y_predit_train) * 100)
+        tableau_erreurs_test = np.array(100 - metrics.accuracy_score(y_test, y_predit_test) * 100)
+    else:
+        tableau_erreurs_train = np.append(tableau_erreurs_train,
+                                          100 - metrics.accuracy_score(y_train, y_predit_train) * 100)
+        tableau_erreurs_test = np.append(tableau_erreurs_test,
+                                         100 - metrics.accuracy_score(y_test, y_predit_test) * 100)
 
     i = i + 1
-    nbr_iterations = nbr_iterations + 100
+    nbr_iterations = nbr_iterations + 5
+
+    plt.plot(tableau_erreurs_train, label="train")
+    plt.plot(tableau_erreurs_test, label="test")
+    plt.legend()
+    plt.title("Erreurs avec " + str(nbr_neurones) + " neurones...")
+    plt.show()
 
 y_pred_test = model.predict(x_test)
 
@@ -45,7 +62,7 @@ plt.plot(y_pred_test, "r:o", label="prédite")
 plt.legend()
 
 plt.title("Ensemble TEST - Nombre neurones = " + str(nbr_neurones))
-plt.get_current_fig_manager().window.state('zoomed')
+#plt.get_current_fig_manager().window.state('zoomed')
 plt.show()
 
 # evaluation : taux d'erreur
