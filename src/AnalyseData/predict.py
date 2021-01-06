@@ -24,6 +24,20 @@ y_train = donnees_ensemble_total2[0:nombre_lignes_base2, nombre_colonnes_base2 -
 x_test = donnees_ensemble_total[0:nombre_lignes_base, 1:nombre_colonnes_base - 4]
 y_test = donnees_ensemble_total[0:nombre_lignes_base, nombre_colonnes_base - 1:]
 
+y_booker = []
+k = 0
+
+while k < nombre_lignes_base:
+
+    reponse = min(donnees_ensemble_total[k, (nombre_colonnes_base - 4)], donnees_ensemble_total[k, (nombre_colonnes_base - 3)], donnees_ensemble_total[k, (nombre_colonnes_base - 2)])
+    if reponse == donnees_ensemble_total[k, (nombre_colonnes_base - 4)]:
+        y_booker.append(0)
+    elif reponse == donnees_ensemble_total[k, (nombre_colonnes_base - 3)]:
+        y_booker.append(1)
+    else:
+        y_booker.append(2)
+    k += 1
+
 nbr_neurones = 6
 
 nbr_iterations = 20
@@ -62,12 +76,18 @@ plt.plot(y_pred_test, "r:o", label="prédite")
 plt.legend()
 
 plt.title("Ensemble TEST - Nombre neurones = " + str(nbr_neurones))
-#plt.get_current_fig_manager().window.state('zoomed')
+# plt.get_current_fig_manager().window.state('zoomed')
 plt.show()
 
 # evaluation : taux d'erreur
 from sklearn import metrics
 
 err = (1.0 - metrics.accuracy_score(y_test, y_pred_test)) * 100
-print("Erreur = ", round(err, 2), "%")
+print("Erreur entre prédiction et résultat = ", round(err, 2), "%")
+print("\n\n===================")
+erreur = (1.0 - metrics.accuracy_score(y_booker, y_pred_test)) * 100
+print("Erreur entre prédiction et book maker= ", round(erreur, 2), "%")
+print("\n\n===================")
+erreur = (1.0 - metrics.accuracy_score(y_booker, y_test)) * 100
+print("Erreur entre résultat et book maker = ", round(erreur, 2), "%")
 print("\n\n===================")
