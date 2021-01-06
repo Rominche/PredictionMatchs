@@ -33,8 +33,8 @@ x_test = donnees_ensemble_total[0:nombre_lignes_base, 1:nombre_colonnes_base - 4
 y_test = donnees_ensemble_total[0:nombre_lignes_base, nombre_colonnes_base - 1:]
 
 # normalisation :
-#scaler = StandardScaler (with_mean=True, with_std=True)
-#scaler.fit (x_train)
+scaler = StandardScaler (with_mean=True, with_std=True)
+scaler.fit (x_train)
 
 #arbre de décision - importation de la classe
 from sklearn.tree import DecisionTreeClassifier
