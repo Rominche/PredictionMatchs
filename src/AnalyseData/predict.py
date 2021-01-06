@@ -1,28 +1,29 @@
 import numpy as np
 import pandas as pd
+
 np.random.seed(7)
 import matplotlib.pyplot as plt
 from sklearn.neural_network import MLPClassifier
 
-donnees_data_frame = pd.read_csv ('../db/data2015_2016.csv' , delimiter=" ")
-donnees_ensemble_total= donnees_data_frame.values
+donnees_data_frame = pd.read_csv('../db/data2015_2016.csv', delimiter=" ")
+donnees_ensemble_total = donnees_data_frame.values
 
-donnees_data_frame2 = pd.read_csv ('../db/data2012_2015.csv' , delimiter=" ")
-donnees_ensemble_total2= donnees_data_frame2.values
+donnees_data_frame2 = pd.read_csv('../db/data2012_2015.csv', delimiter=" ")
+donnees_ensemble_total2 = donnees_data_frame2.values
 
-nombre_lignes_base=donnees_ensemble_total.shape[0]
-nombre_colonnes_base=donnees_ensemble_total.shape[1]
+nombre_lignes_base = donnees_ensemble_total.shape[0]
+nombre_colonnes_base = donnees_ensemble_total.shape[1]
 
-nombre_lignes_base2=donnees_ensemble_total2.shape[0]
-nombre_colonnes_base2=donnees_ensemble_total2.shape[1]
+nombre_lignes_base2 = donnees_ensemble_total2.shape[0]
+nombre_colonnes_base2 = donnees_ensemble_total2.shape[1]
 
-x_train = donnees_ensemble_total2[0:nombre_lignes_base2,1:nombre_colonnes_base2-4]
-y_train = donnees_ensemble_total2[0:nombre_lignes_base2,nombre_colonnes_base2-1:]
+x_train = donnees_ensemble_total2[0:nombre_lignes_base2, 1:nombre_colonnes_base2 - 4]
+y_train = donnees_ensemble_total2[0:nombre_lignes_base2, nombre_colonnes_base2 - 1:]
 
-x_test = donnees_ensemble_total[0:nombre_lignes_base,1:nombre_colonnes_base-4]
-y_test = donnees_ensemble_total[0:nombre_lignes_base,nombre_colonnes_base-1:]
+x_test = donnees_ensemble_total[0:nombre_lignes_base, 1:nombre_colonnes_base - 4]
+y_test = donnees_ensemble_total[0:nombre_lignes_base, nombre_colonnes_base - 1:]
 
-nbr_neurones = 8
+nbr_neurones = 6
 
 nbr_iterations = 20
 
@@ -47,8 +48,9 @@ plt.title("Ensemble TEST - Nombre neurones = " + str(nbr_neurones))
 plt.get_current_fig_manager().window.state('zoomed')
 plt.show()
 
-#evaluation : taux d'erreur
+# evaluation : taux d'erreur
 from sklearn import metrics
-err = (1.0 - metrics.accuracy_score(y_test, y_pred_test))*100
+
+err = (1.0 - metrics.accuracy_score(y_test, y_pred_test)) * 100
 print("Erreur = ", round(err, 2), "%")
 print("\n\n===================")

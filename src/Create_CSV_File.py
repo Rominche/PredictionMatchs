@@ -1,11 +1,11 @@
 import sqlite3
 import configparser
 import csv
-from src.ExtractData_PlayerAttributes import team_overall
-from src.ExtractDataLastTenGames import last_ten_games
-from src.ExtractData_Between2Teams import teams_historical
-from src.ExtractData_BettingOdds import betting_odds
-from src.ExtractData_Resultats import matchResultat
+from src.ExtractData.ExtractData_PlayerAttributes import team_overall
+from src.ExtractData.ExtractDataLastTenGames import last_ten_games
+from src.ExtractData.ExtractData_Between2Teams import teams_historical
+from src.ExtractData.ExtractData_BettingOdds import betting_odds
+from src.ExtractData.ExtractData_Resultats import matchResultat
 
 config = configparser.ConfigParser()
 config.read('../config/config.ini')
@@ -18,9 +18,9 @@ try:
     cursor = sqlite_connection.cursor()
     print("Database created and Successfully Connected to SQLite")
 
-    listMatchs = cursor.execute("select id from Match where season='2015/2016' and id<1689").fetchall()
+    listMatchs = cursor.execute("select id from Match where season='2015/2016'").fetchall()
 
-    with open('data2015_2016.csv', 'w', newline='') as csvfile:
+    with open('db/data2015_2016.csv', 'w', newline='') as csvfile:
         for i in listMatchs:
             home_team, away_team = team_overall(cursor, i[0])
             homeWinPercentage, homeDrawPercentage, homeLossPercentage, \
