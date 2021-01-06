@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn import metrics
+from sklearn.utils import column_or_1d
 
 np.random.seed(7)
 import matplotlib.pyplot as plt
@@ -24,6 +25,9 @@ y_train = donnees_ensemble_total2[0:nombre_lignes_base2, nombre_colonnes_base2 -
 x_test = donnees_ensemble_total[0:nombre_lignes_base, 1:nombre_colonnes_base - 4]
 y_test = donnees_ensemble_total[0:nombre_lignes_base, nombre_colonnes_base - 1:]
 
+y_test  =  column_or_1d (y_test, warn=False)
+y_train  =  column_or_1d (y_train, warn=False)
+
 y_booker = []
 k = 0
 
@@ -40,11 +44,11 @@ while k < nombre_lignes_base:
 
 nbr_neurones = 6
 
-nbr_iterations = 20
+nbr_iterations = 1
 
 i = 0
-while i < 10:
-    model = MLPClassifier(hidden_layer_sizes=[nbr_neurones], random_state=7, max_iter=nbr_iterations)
+while i < 7:
+    model = MLPClassifier(hidden_layer_sizes=[nbr_neurones], alpha=0.05, random_state=7, max_iter=nbr_iterations)
     model.fit(x_train, y_train)
 
     y_predit_train = model.predict(x_train)
@@ -60,7 +64,7 @@ while i < 10:
                                          100 - metrics.accuracy_score(y_test, y_predit_test) * 100)
 
     i = i + 1
-    nbr_iterations = nbr_iterations + 5
+    nbr_iterations = nbr_iterations + 10
 
     plt.plot(tableau_erreurs_train, label="train")
     plt.plot(tableau_erreurs_test, label="test")
@@ -84,10 +88,10 @@ from sklearn import metrics
 
 err = (1.0 - metrics.accuracy_score(y_test, y_pred_test)) * 100
 print("Erreur entre prédiction et résultat = ", round(err, 2), "%")
-print("\n\n===================")
-erreur = (1.0 - metrics.accuracy_score(y_booker, y_pred_test)) * 100
-print("Erreur entre prédiction et book maker= ", round(erreur, 2), "%")
-print("\n\n===================")
+print("\n===================")
 erreur = (1.0 - metrics.accuracy_score(y_booker, y_test)) * 100
-print("Erreur entre résultat et book maker = ", round(erreur, 2), "%")
-print("\n\n===================")
+print("Erreur entre résultat et bookmaker = ", round(erreur, 2), "%")
+print("\n===================")
+erreur = (1.0 - metrics.accuracy_score(y_booker, y_pred_test)) * 100
+print("Erreur entre prédiction et bookmaker= ", round(erreur, 2), "%")
+print("\n===================")
