@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.utils.validation import column_or_1d
 from sklearn.preprocessing import StandardScaler
-
+from sklearn import metrics
 
 def erreur_commise (valeurs_reelles, valeurs_predites):
     erreur = 0
@@ -62,7 +62,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 max_depth_courante = 1
 
-while (max_depth_courante < 5):
+while (max_depth_courante < 11):
     # while (max_depth_courante<30) and (not early_stopping) :
     mon_arbre = DecisionTreeClassifier(max_depth=max_depth_courante)
 
@@ -72,21 +72,26 @@ while (max_depth_courante < 5):
     y_predit_test = mon_arbre.predict(x_test)
 
     if max_depth_courante == 1:  # premier point à ajouter :
-        tableau_erreurs_train = erreur_commise(y_train, y_predit_train)
-        tableau_erreurs_test = erreur_commise(y_test, y_predit_test)
+        tableau_erreurs_train = np.array(100 - metrics.accuracy_score(y_train, y_predit_train) * 100)
+        tableau_erreurs_test = np.array(100 - metrics.accuracy_score(y_test, y_predit_test) * 100)
     else:
-        tableau_erreurs_train = np.append(tableau_erreurs_train, erreur_commise(y_train, y_predit_train))
-        tableau_erreurs_test = np.append(tableau_erreurs_test, erreur_commise(y_test, y_predit_test))
+        tableau_erreurs_train = np.append(tableau_erreurs_train,
+                                          100 - metrics.accuracy_score(y_train, y_predit_train) * 100)
+        tableau_erreurs_test = np.append(tableau_erreurs_test,
+                                         100 - metrics.accuracy_score(y_test, y_predit_test) * 100)
 
     max_depth_courante = max_depth_courante + 1
 
-tree.plot_tree (mon_arbre, filled=True, impurity=False, proportion=True, rounded=True)
-plt.show()
+#tree.plot_tree (mon_arbre, filled=True, impurity=False, proportion=True, rounded=True)
+#plt.show()
 
+tableau_erreurs_train = np.insert(tableau_erreurs_train, 0, 44.5)
+tableau_erreurs_test = np.insert(tableau_erreurs_test, 0, 44.5)
 plt.plot(tableau_erreurs_train, label="train")
 plt.plot(tableau_erreurs_test, label="test")
 plt.legend()
-plt.title("Avec hauteurs de 1 à 100")
+plt.title("Taux d'erreur avec hauteur variant de 1 à 10")
+plt.xlim(1, 10)
 plt.show()
 
 #taux d'erreur
@@ -95,7 +100,7 @@ print ("\n\n===================\n")
 y_predit_test = mon_arbre.predict (x_test)
 
 #evaluation : taux d'erreur = 0.07
-from sklearn import metrics
+
 err = (1.0 - metrics.accuracy_score(y_test, y_predit_test))*100
 print ("Erreur = ", round(err,2), "%")
 print ("\n\n===================\n")

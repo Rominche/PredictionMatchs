@@ -54,34 +54,99 @@ while i < 7:
     y_predit_train = model.predict(x_train)
     y_predit_test = model.predict(x_test)
 
-    if i == 0:
+    '''if i == 0:
         tableau_erreurs_train = np.array(100 - metrics.accuracy_score(y_train, y_predit_train) * 100)
         tableau_erreurs_test = np.array(100 - metrics.accuracy_score(y_test, y_predit_test) * 100)
     else:
         tableau_erreurs_train = np.append(tableau_erreurs_train,
                                           100 - metrics.accuracy_score(y_train, y_predit_train) * 100)
         tableau_erreurs_test = np.append(tableau_erreurs_test,
-                                         100 - metrics.accuracy_score(y_test, y_predit_test) * 100)
+                                         100 - metrics.accuracy_score(y_test, y_predit_test) * 100)'''
 
     i = i + 1
-    nbr_iterations = nbr_iterations + 10
+    nbr_iterations += 10
 
-    plt.plot(tableau_erreurs_train, label="train")
-    plt.plot(tableau_erreurs_test, label="test")
-    plt.legend()
-    plt.title("Erreurs avec " + str(nbr_neurones) + " neurones...")
-    plt.show()
+#plt.plot(tableau_erreurs_train, label="train")
+#plt.plot(tableau_erreurs_test, label="test")
+#plt.legend()
+#plt.title("Taux d'erreur avec " + str(nbr_iterations) + " itérations en fonction du nombre de neurones")
+#plt.show()
 
 y_pred_test = model.predict(x_test)
 
-plt.clf()
+argent = 0
+argent2 = 0
+
+for j in range(0, len(y_pred_test)):
+    if int(y_pred_test[j]) == 1:
+        if int(y_test[j]) == int(y_pred_test[j]):
+            argent += 10*(donnees_ensemble_total[j, nombre_colonnes_base - 3]-1)
+        else:
+            argent -= 10
+
+for j in range(0, len(y_pred_test)):
+    if int(y_pred_test[j]) == 0:
+        if int(y_test[j]) == int(y_pred_test[j]):
+            argent2 += 10*(donnees_ensemble_total[j, nombre_colonnes_base - 4]-1)
+        else:
+            argent2 -= 10
+    elif int(y_pred_test[j]) == 1:
+        if int(y_test[j]) == int(y_pred_test[j]):
+            argent2 += 10*(donnees_ensemble_total[j, nombre_colonnes_base - 3]-1)
+        else:
+            argent2 -= 10
+    else:
+        if int(y_test[j]) == int(y_pred_test[j]):
+            argent2 += 10*(donnees_ensemble_total[j, nombre_colonnes_base - 2]-1)
+        else:
+            argent2 -= 10
+
+argent_booker = 0
+
+for j in range(0, len(y_booker)):
+    if int(y_booker[j]) == 0:
+        if int(y_test[j]) == int(y_booker[j]):
+            argent_booker += 10*(donnees_ensemble_total[j, nombre_colonnes_base - 4]-1)
+        else:
+            argent_booker -= 10
+    elif int(y_booker[j]) == 1:
+        if int(y_test[j]) == int(y_booker[j]):
+            argent_booker += 10*(donnees_ensemble_total[j, nombre_colonnes_base - 3]-1)
+        else:
+            argent_booker -= 10
+    else:
+        if int(y_test[j]) == int(y_booker[j]):
+            argent_booker += 10*(donnees_ensemble_total[j, nombre_colonnes_base - 2]-1)
+        else:
+            argent_booker -= 10
+
+print("Si vous nous aviez suivi sur les nuls, vous auriez actuellement gagné "+str(round(argent, 2))+"€")
+
+print("Si vous nous aviez suivi sur tous nos paris, vous auriez actuellement gagné "+str(round(argent2, 2))+"€")
+
+print("Si vous aviez suivi les bookmakers, vous auriez actuellement "+str(round(argent_booker, 2))+"€")
+print("\n===================")
+
+nb_total = 0
+bien_predit = 0
+
+for j in range(0, len(y_test)):
+    if int(y_test[j]) == 1:
+        nb_total += 1
+        if int(y_test[j]) == int(y_pred_test[j]):
+            bien_predit += 1
+
+print("Taux d'erreur sur les nuls : "+str(round((1-(bien_predit/nb_total))*100, 2))+"%")
+print("\n===================")
+
+'''plt.clf()
 plt.plot(y_test, "b-^", label="à prédire")
 plt.plot(y_pred_test, "r:o", label="prédite")
 plt.legend()
 
 plt.title("Ensemble TEST - Nombre neurones = " + str(nbr_neurones))
 # plt.get_current_fig_manager().window.state('zoomed')
-plt.show()
+plt.show()'''
 
 # evaluation : taux d'erreur
 from sklearn import metrics
